@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EPI Tracker | Dashboard</title>
+  <link rel="stylesheet" href="/style.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+    <div class="sidebar">
+    <div class="sidebar-header">
+      <button id="toggleMenu" class="hamburger" aria-label="Abrir menu"><i class="fas fa-bars"></i></button>
+      <h1 class="logo">EPI Tracker</h1>
+    </div>
+
+    <nav>
+      <ul id="menuList">
+        <li><a href="./index.html" class="active"><i class="fas fa-chart-line"></i> Dashboard</a></li>
+        <li><a href="./inv/inventario.html"><i class="fas fa-boxes"></i> Inventário</a></li>
+        <li><a href="./inspe/inspecoes.html"><i class="fas fa-clipboard-check"></i> Inspeções</a></li>
+        <li><a href="./relat/relatorio.html"><i class="fas fa-file-alt"></i> Relatórios</a></li>
+        <li><a href="./config/config.html"><i class="fas fa-cog"></i> Configurações</a></li>
+      </ul>
+    </nav>
+  </div>
+
+  <div class="main-content">
+    <header>
+      <h2>Dashboard</h2>
+    </header>
+
+    <section class="kpis">
+      <div class="kpi-card em-dia">
+        <h3>EPIs em Dia</h3>
+        <p>120</p>
+      </div>
+      <div class="kpi-card proximos">
+        <h3>Próximos ao Vencimento</h3>
+        <p>18</p>
+      </div>
+      <div class="kpi-card vencidos">
+        <h3>EPIs Vencidos</h3>
+        <p>5</p>
+      </div>
+    </section>
+
+    <section class="graficos">
+      <div class="grafico">
+        <h4>Inspeções por Mês</h4>
+        <div class="grafico-barra">
+        <canvas id="barraChart" width="400" height="150"></canvas>
+        </div>
+      </div>
+      <div class="grafico">
+        <h4>Distribuição por Tipo</h4>
+        <div class="grafico-pizza">
+         <canvas id="graficoPizza" style="max-width: 500px; max-height: 400px;"></canvas>
+        </div>
+      </div>
+    </section>
+
+    <section class="tabela">
+      <h4>Resumo</h4>
+      <table>
+        <thead>
+          <tr>
+            <th>Setor</th>
+            <th>Colaborador</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Manutenção</td>
+            <td>João Silva</td>
+            <td>Em Dia</td>
+          </tr>
+          <tr>
+            <td>Operações</td>
+            <td>Maria Santos</td>
+            <td>Próximo ao Vencimento</td>
+          </tr>
+          <tr>
+            <td>Administrativo</td>
+            <td>Carlos Lima</td>
+            <td>Vencido</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+  </div>
+
+  <script>
+  const ctxBarra = document.getElementById('barraChart').getContext('2d');
+  const barraChart = new Chart(ctxBarra, {
+    type: 'bar',
+    data: {
+      labels: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai'],
+      datasets: [{
+        label: 'Inspeções',
+        data: [12, 19, 3, 5, 2],
+        backgroundColor: '#2c3e50'
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      scales: {
+        y: { beginAtZero: true }
+      }
+    }
+  });
+
+  const ctxPizza = document.getElementById('graficoPizza').getContext('2d');
+  const graficoPizza = new Chart(ctxPizza, {
+  type: 'pie',
+  data: {
+    labels: ['Capacete', 'Sapato', 'Óculos', 'Auricular'],
+    datasets: [{
+      data: [25, 35, 20, 20],
+      backgroundColor: ['#2c3e50', '#34495e', '#7f8c8d', '#95a5a6'],
+      borderColor: '#fff',
+      borderWidth: 1
+    }]
+  },
+  options: {
+    responsive: true,
+    plugins: {
+      legend: {
+        position: 'right',
+        align: 'center',
+        labels: {
+          boxWidth: 8,
+          padding: 10,
+          color: '#2c3e50'
+        }
+      }
+    }
+  }
+});
+
+const toggleMenu = document.getElementById('toggleMenu');
+  const menuList = document.getElementById('menuList');
+
+  toggleMenu.addEventListener('click', () => {
+    menuList.classList.toggle('active');
+  });
+</script>
+
+</body>
+</html>

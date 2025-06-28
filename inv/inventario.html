@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EPI Tracker | Inventário</title>
+  <link rel="stylesheet" href="./inventario.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  </head>
+<body>
+  <div class="container">
+    <div class="sidebar">
+      <h1 class="logo">EPI Tracker</h1>
+      <nav>
+        <ul>
+  <li><a href="../index.html"><i class="fas fa-chart-line"></i> Dashboard</a></li>
+  <li><a href="./inventario.html" class="active"><i class="fas fa-boxes"></i> Inventário</a></li>
+  <li><a href="../inspe/inspecoes.html"><i class="fas fa-clipboard-check"></i> Inspeções</a></li>
+  <li><a href="../relat/relatorio.html"><i class="fas fa-file-alt"></i> Relatórios</a></li>
+  <li><a href="../config/config.html"><i class="fas fa-cog"></i> Configurações</a></li>
+</ul>
+      </nav>
+    </div>
+
+    <div class="main-content">
+      <header>
+        <h2>Inventário de EPIs</h2>
+      </header>
+
+      <section class="inventario-section">
+        <h3>Lista de Equipamentos</h3>
+
+        <div class="filtros">
+          <input type="text" placeholder="Pesquisar por nome">
+          <select>
+            <option value="">Tipo</option>
+            <option value="capacete">Capacete</option>
+            <option value="luva">Luva</option>
+            <option value="botina">Botina</option>
+          </select>
+          <select>
+            <option value="">Status</option>
+            <option value="disponivel">Disponível</option>
+            <option value="em uso">Em uso</option>
+            <option value="vencido">Vencido</option>
+          </select>
+          <button>Filtrar</button>
+        </div>
+
+        <div class="tabela-inventario">
+          <table>
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Nome do EPI</th>
+                <th>Tipo</th>
+                <th>Status</th>
+                <th>Validade</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>001</td>
+                <td>Capacete Azul</td>
+                <td>Capacete</td>
+                <td>Disponível</td>
+                <td>12/2025</td>
+              </tr>
+              <tr>
+                <td>002</td>
+                <td>Luva de Raspa</td>
+                <td>Luva</td>
+                <td>Em uso</td>
+                <td>03/2025</td>
+              </tr>
+              <tr>
+                <td>003</td>
+                <td>Botina Preta</td>
+                <td>Botina</td>
+                <td>Vencido</td>
+                <td>11/2023</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </div>
+  </div>
+</body>
+</html>

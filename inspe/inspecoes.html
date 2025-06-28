@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EPI Tracker | Inspeções</title>
+  <link rel="stylesheet" href="./inspecoes.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  </head>
+<body>
+  <div class="container">
+    <div class="sidebar">
+      <h1 class="logo">EPI Tracker</h1>
+      <nav>
+        <ul>
+  <li><a href="../index.html"><i class="fas fa-chart-line"></i> Dashboard</a></li>
+  <li><a href="../inv/inventario.html"><i class="fas fa-boxes"></i> Inventário</a></li>
+  <li><a href="./inspecoes.html" class="active"><i class="fas fa-clipboard-check"></i> Inspeções</a></li>
+  <li><a href="../relat/relatorio.html"><i class="fas fa-file-alt"></i> Relatórios</a></li>
+  <li><a href="../config/config.html"><i class="fas fa-cog"></i> Configurações</a></li>
+</ul>
+      </nav>
+    </div>
+
+    <div class="main-content">
+      <header>
+        <h2>Inspeções de EPIs</h2>
+      </header>
+
+      <section class="inspecao-section">
+        <h3>Histórico de Inspeções</h3>
+
+        <div class="filtros">
+          <input type="text" placeholder="Pesquisar colaborador">
+          <select>
+            <option value="">Status</option>
+            <option value="aprovado">Aprovado</option>
+            <option value="reprovado">Reprovado</option>
+            <option value="pendente">Pendente</option>
+          </select>
+          <input type="date">
+          <button>Filtrar</button>
+        </div>
+
+        <div class="tabela-inspecao">
+          <table>
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Colaborador</th>
+                <th>Setor</th>
+                <th>Data</th>
+                <th>Status</th>
+                <th>Observações</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>101</td>
+                <td>João Silva</td>
+                <td>Manutenção</td>
+                <td>2025-06-01</td>
+                <td>Aprovado</td>
+                <td>Equipamento em boas condições</td>
+              </tr>
+              <tr>
+                <td>102</td>
+                <td>Maria Santos</td>
+                <td>Operações</td>
+                <td>2025-06-10</td>
+                <td>Reprovado</td>
+                <td>Luva danificada</td>
+              </tr>
+              <tr>
+                <td>103</td>
+                <td>Lucas Costa</td>
+                <td>Administrativo</td>
+                <td>2025-06-15</td>
+                <td>Pendente</td>
+                <td>Aguardando retorno do setor</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </div>
+  </div>
+</body>
+</html>
