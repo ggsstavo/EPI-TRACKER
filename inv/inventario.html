@@ -8,19 +8,22 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   </head>
 <body>
-  <div class="container">
-    <div class="sidebar">
+  <div class="sidebar">
+    <div class="sidebar-header">
+      <button id="toggleMenu" class="hamburger" aria-label="Abrir menu"><i class="fas fa-bars"></i></button>
       <h1 class="logo">EPI Tracker</h1>
-      <nav>
-        <ul>
-  <li><a href="../index.html"><i class="fas fa-chart-line"></i> Dashboard</a></li>
-  <li><a href="./inventario.html" class="active"><i class="fas fa-boxes"></i> Inventário</a></li>
-  <li><a href="../inspe/inspecoes.html"><i class="fas fa-clipboard-check"></i> Inspeções</a></li>
-  <li><a href="../relat/relatorio.html"><i class="fas fa-file-alt"></i> Relatórios</a></li>
-  <li><a href="../config/config.html"><i class="fas fa-cog"></i> Configurações</a></li>
-</ul>
-      </nav>
     </div>
+
+    <nav>
+      <ul id="menuList">
+        <li><a href="../index.html"><i class="fas fa-chart-line"></i> Dashboard</a></li>
+        <li><a href="./inventario.html" class="active"><i class="fas fa-boxes"></i> Inventário</a></li>
+        <li><a href="../inspe/inspecoes.html"><i class="fas fa-clipboard-check"></i> Inspeções</a></li>
+        <li><a href="../relat/relatorio.html"><i class="fas fa-file-alt"></i> Relatórios</a></li>
+        <li><a href="../config/config.html"><i class="fas fa-cog"></i> Configurações</a></li>
+      </ul>
+    </nav>
+  </div>
 
     <div class="main-content">
       <header>
@@ -185,6 +188,19 @@
         sugestoes.innerHTML = "";
       }
     });
+
+    window.addEventListener("DOMContentLoaded", () => {
+    const modoEscuroAtivo = localStorage.getItem("modoEscuro") === "true";
+    if (modoEscuroAtivo) {
+      document.body.classList.add("dark-theme");
+    }
+  });
+
+  const toggleMenu = document.getElementById('toggleMenu');
+  const menuList = document.getElementById('menuList');
+  toggleMenu?.addEventListener('click', () => {
+    menuList.classList.toggle('active');
+  });
 </script>
 </body>
 </html>
