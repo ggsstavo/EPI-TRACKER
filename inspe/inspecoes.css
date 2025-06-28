@@ -138,3 +138,54 @@
         padding: 20px;
       }
     }
+
+    .sugestao-wrapper {
+      position: relative;
+      flex: 1;
+      min-width: 200px;
+      max-width: 300px; /* limite máximo */
+    }
+    #colaboradorFiltro {
+      width: 100%;
+      box-sizing: border-box;
+      padding: 10px;
+      font-size: 14px;
+    }
+    .sugestoes-lista {
+      position: absolute;
+      background: white;
+      border: 1px solid #ccc;
+      max-height: 150px;
+      overflow-y: auto;
+      width: 100%; /* largura igual ao input pai */
+      list-style: none;
+      padding: 0;
+      margin: 4px 0 0;
+      z-index: 10;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+      border-radius: 4px;
+    }
+
+    .sugestoes-lista li {
+      padding: 8px 12px;
+      cursor: pointer;
+    }
+
+    .sugestoes-lista li:hover {
+      background-color: #eee;
+    }
+
+    .filtros {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-bottom: 20px;
+      align-items: center;
+    }
+
+    .filtros select,
+    .filtros input[type="date"],
+    .filtros button {
+      padding: 10px;
+      font-size: 14px;
+    }

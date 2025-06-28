@@ -13,12 +13,12 @@
       <h1 class="logo">EPI Tracker</h1>
       <nav>
         <ul>
-  <li><a href="../index.html"><i class="fas fa-chart-line"></i> Dashboard</a></li>
-  <li><a href="../inv/inventario.html"><i class="fas fa-boxes"></i> Inventário</a></li>
-  <li><a href="../inspe/inspecoes.html"><i class="fas fa-clipboard-check"></i> Inspeções</a></li>
-  <li><a href="../relat/relatorio.html"><i class="fas fa-file-alt"></i> Relatórios</a></li>
-  <li><a href="./config.html" class="active"><i class="fas fa-cog"></i> Configurações</a></li>
-</ul>
+          <li><a href="../index.html"><i class="fas fa-chart-line"></i> Dashboard</a></li>
+          <li><a href="../inv/inventario.html"><i class="fas fa-boxes"></i> Inventário</a></li>
+          <li><a href="../inspe/inspecoes.html"><i class="fas fa-clipboard-check"></i> Inspeções</a></li>
+          <li><a href="../relat/relatorio.html"><i class="fas fa-file-alt"></i> Relatórios</a></li>
+          <li><a href="./config.html" class="active"><i class="fas fa-cog"></i> Configurações</a></li>
+        </ul>
       </nav>
     </div>
 
@@ -32,17 +32,32 @@
         <form>
           <div class="form-group">
             <label for="nomeEmpresa">Nome da Empresa</label>
-            <input type="text" id="nomeEmpresa" name="nomeEmpresa" placeholder="Digite o nome da empresa"/>
+            <input
+              type="text"
+              id="nomeEmpresa"
+              name="nomeEmpresa"
+              placeholder="Digite o nome da empresa"
+            />
           </div>
 
           <div class="form-group">
             <label for="emailContato">Email de Contato</label>
-            <input type="email" id="emailContato" name="emailContato" placeholder="email@empresa.com" />
+            <input
+              type="email"
+              id="emailContato"
+              name="emailContato"
+              placeholder="email@empresa.com"
+            />
           </div>
 
           <div class="form-group">
             <label for="telefoneContato">Telefone de Contato</label>
-            <input type="text" id="telefoneContato" name="telefoneContato" placeholder="(XX) XXXXX-XXXX"/>
+            <input
+              type="text"
+              id="telefoneContato"
+              name="telefoneContato"
+              placeholder="(XX) XXXXX-XXXX"
+            />
           </div>
 
           <button type="submit" class="btn">Salvar</button>
@@ -53,7 +68,7 @@
         <h3>Tema do Sistema</h3>
         <label for="toggleTema">Modo Escuro</label>
         <label class="toggle-switch">
-          <input type="checkbox" id="toggleTema"/>
+          <input type="checkbox" id="toggleTema" />
           <span class="slider"></span>
         </label>
       </section>
@@ -63,17 +78,32 @@
         <form>
           <div class="form-group">
             <label for="senhaAtual">Senha Atual</label>
-            <input type="password" id="senhaAtual" name="senhaAtual" placeholder="Digite sua senha atual"/>
+            <input
+              type="password"
+              id="senhaAtual"
+              name="senhaAtual"
+              placeholder="Digite sua senha atual"
+            />
           </div>
 
           <div class="form-group">
             <label for="novaSenha">Nova Senha</label>
-            <input type="password" id="novaSenha" name="novaSenha" placeholder="Digite a nova senha" />
+            <input
+              type="password"
+              id="novaSenha"
+              name="novaSenha"
+              placeholder="Digite a nova senha"
+            />
           </div>
 
           <div class="form-group">
             <label for="confirmarSenha">Confirmar Nova Senha</label>
-            <input type="password" id="confirmarSenha" name="confirmarSenha" placeholder="Confirme a nova senha"/>
+            <input
+              type="password"
+              id="confirmarSenha"
+              name="confirmarSenha"
+              placeholder="Confirme a nova senha"
+            />
           </div>
 
           <button type="submit" class="btn">Alterar Senha</button>
@@ -81,5 +111,27 @@
       </section>
     </div>
   </div>
+
+  <script>
+    const toggleTema = document.getElementById('toggleTema');
+
+function aplicarTema() {
+  const modoEscuroAtivo = localStorage.getItem('modoEscuro') === 'true';
+  if (modoEscuroAtivo) {
+    document.body.classList.add('dark-theme');
+    toggleTema.checked = true;
+  } else {
+    document.body.classList.remove('dark-theme');
+    toggleTema.checked = false;
+  }
+}
+
+aplicarTema();
+
+toggleTema.addEventListener('change', () => {
+  localStorage.setItem('modoEscuro', toggleTema.checked);
+  aplicarTema();
+});
+  </script>
 </body>
 </html>

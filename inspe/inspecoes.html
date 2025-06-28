@@ -31,15 +31,19 @@
         <h3>Histórico de Inspeções</h3>
 
         <div class="filtros">
-          <input type="text" placeholder="Pesquisar colaborador">
-          <select>
+          <div class="sugestao-wrapper">
+            <input type="text" id="colaboradorFiltro" placeholder="Pesquisar colaborador" autocomplete="off" />
+            <ul id="sugestoesColaborador" class="sugestoes-lista"></ul>
+          </div>
+
+          <select id="statusFiltro">
             <option value="">Status</option>
             <option value="aprovado">Aprovado</option>
             <option value="reprovado">Reprovado</option>
             <option value="pendente">Pendente</option>
           </select>
-          <input type="date">
-          <button>Filtrar</button>
+          <input type="date" id="dataFiltro" />
+          <button id="btnFiltrar">Filtrar</button>
         </div>
 
         <div class="tabela-inspecao">
@@ -54,12 +58,12 @@
                 <th>Observações</th>
               </tr>
             </thead>
-            <tbody>
+            <tbody id="tbodyInspecoes">
               <tr>
                 <td>101</td>
                 <td>João Silva</td>
                 <td>Manutenção</td>
-                <td>2025-06-01</td>
+                <td>06/01/2025</td>
                 <td>Aprovado</td>
                 <td>Equipamento em boas condições</td>
               </tr>
@@ -67,7 +71,7 @@
                 <td>102</td>
                 <td>Maria Santos</td>
                 <td>Operações</td>
-                <td>2025-06-10</td>
+                <td>10/06/2025</td>
                 <td>Reprovado</td>
                 <td>Luva danificada</td>
               </tr>
@@ -75,9 +79,25 @@
                 <td>103</td>
                 <td>Lucas Costa</td>
                 <td>Administrativo</td>
-                <td>2025-06-15</td>
+                <td>15/06/2025</td>
                 <td>Pendente</td>
                 <td>Aguardando retorno do setor</td>
+              </tr>
+              <tr>
+                <td>104</td>
+                <td>Ana Beatriz</td>
+                <td>Segurança</td>
+                <td>20/06/2025</td>
+                <td>Aprovado</td>
+                <td>Equipamento em ótimo estado</td>
+              </tr>
+              <tr>
+                <td>105</td>
+                <td>Pedro Henrique</td>
+                <td>Produção</td>
+                <td>25/06/2025</td>
+                <td>Reprovado</td>
+                <td>Capacete com rachadura</td>
               </tr>
             </tbody>
           </table>
@@ -85,5 +105,82 @@
       </section>
     </div>
   </div>
+
+  <script>
+  const colaboradores = [
+    "João Silva",
+    "Maria Santos",
+    "Lucas Costa",
+    "Ana Beatriz",
+    "Pedro Henrique"
+  ];
+
+  const inputColaborador = document.getElementById('colaboradorFiltro');
+  const listaSugestoes = document.getElementById('sugestoesColaborador');
+  const btnFiltrar = document.getElementById('btnFiltrar');
+  const filtroStatus = document.getElementById('statusFiltro');
+  const tbody = document.getElementById('tbodyInspecoes');
+
+  // Salva as linhas originais para filtro
+  const linhasOriginais = Array.from(tbody.querySelectorAll('tr'));
+
+  // Função para mostrar sugestões de nomes (máx 3)
+  function mostrarSugestoes(lista) {
+    listaSugestoes.innerHTML = '';
+    lista.slice(0, 3).forEach(item => {
+      const li = document.createElement('li');
+      li.textContent = item;
+      li.addEventListener('click', () => {
+        inputColaborador.value = item;
+        listaSugestoes.innerHTML = '';
+      });
+      listaSugestoes.appendChild(li);
+    });
+  }
+
+  // Eventos para input colaborador — mostrar sugestões
+  inputColaborador.addEventListener('focus', () => {
+    mostrarSugestoes(colaboradores);
+  });
+
+  inputColaborador.addEventListener('input', () => {
+    const termo = inputColaborador.value.toLowerCase();
+    if (termo.length === 0) {
+      mostrarSugestoes(colaboradores);
+      return;
+    }
+    const resultados = colaboradores.filter(nome => nome.toLowerCase().includes(termo));
+    mostrarSugestoes(resultados);
+  });
+
+  // Fecha sugestões se clicar fora
+  document.addEventListener('click', e => {
+    if (!inputColaborador.contains(e.target) && !listaSugestoes.contains(e.target)) {
+      listaSugestoes.innerHTML = '';
+    }
+  });
+
+  // Função para filtrar e mostrar linhas na tabela
+  btnFiltrar.addEventListener('click', () => {
+    const termoColaborador = inputColaborador.value.trim().toLowerCase();
+    const statusSelecionado = filtroStatus.value.toLowerCase();
+
+    // Filtra as linhas originais para corresponder ao filtro (ignora data)
+    const filtradas = linhasOriginais.filter(tr => {
+      const tdColaborador = tr.cells[1].textContent.toLowerCase();
+      const tdStatus = tr.cells[4].textContent.toLowerCase();
+
+      const okColaborador = termoColaborador === '' || tdColaborador.includes(termoColaborador);
+      const okStatus = statusSelecionado === '' || tdStatus === statusSelecionado;
+
+      return okColaborador && okStatus;
+    });
+
+    // Atualiza a tabela mostrando todas as linhas filtradas (sem limite)
+    tbody.innerHTML = '';
+    filtradas.forEach(tr => tbody.appendChild(tr));
+  });
+</script>
+
 </body>
 </html>

@@ -192,3 +192,68 @@
         max-width: 100%;
       }
     }
+
+    /* Modo escuro no body e main-content */
+body.dark-theme {
+  background-color: #121212;
+  color: #e0e0e0;
+}
+
+body.dark-theme .main-content {
+  background-color: #1e1e1e;
+  color: #e0e0e0;
+  box-shadow: none;
+}
+
+/* Sidebar no modo escuro - cor base */
+body.dark-theme .sidebar {
+  background-color: #223240 !important;
+  color: white !important;
+}
+
+/* Links sidebar no modo escuro */
+body.dark-theme .sidebar a {
+  color: white !important;
+}
+
+/* Hover e active da sidebar no modo escuro com contraste melhor */
+body.dark-theme .sidebar a:hover,
+body.dark-theme .sidebar a.active {
+  background-color: #335766 !important;
+  color: white !important;
+}
+
+/* Inputs, botões, textos e labels na main-content continuam mudando no dark */
+body.dark-theme label{
+  color: #e0e0e0;
+}
+
+body.dark-theme h3{
+  color: #a8c0d8;
+}
+
+body.dark-theme h2{
+  color: #d9e6f2;
+}
+
+body.dark-theme input,
+body.dark-theme select {
+  background-color: #333;
+  border: 1px solid #555;
+  color: #eee;
+}
+
+body.dark-theme input::placeholder {
+  color: #bbb;
+}
+
+body.dark-theme .btn {
+  background-color: #223240;
+  color: #e0e0e0;
+  transition: background-color 0.3s ease;
+}
+
+body.dark-theme .btn:hover {
+  background-color: #335766;
+  color: #e0e0e0;
+}

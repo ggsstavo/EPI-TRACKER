@@ -62,90 +62,146 @@
     </section>
 
     <section class="tabela">
-      <h4>Resumo</h4>
-      <table>
-        <thead>
-          <tr>
-            <th>Setor</th>
-            <th>Colaborador</th>
-            <th>Status</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>Manutenção</td>
-            <td>João Silva</td>
-            <td>Em Dia</td>
-          </tr>
-          <tr>
-            <td>Operações</td>
-            <td>Maria Santos</td>
-            <td>Próximo ao Vencimento</td>
-          </tr>
-          <tr>
-            <td>Administrativo</td>
-            <td>Carlos Lima</td>
-            <td>Vencido</td>
-          </tr>
-        </tbody>
-      </table>
-    </section>
+  <h4>Resumo</h4>
+  <table>
+    <thead>
+      <tr>
+        <th>Setor</th>
+        <th>Colaborador</th>
+        <th>Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Manutenção</td>
+        <td>João Silva</td>
+        <td>Em Dia</td>
+      </tr>
+      <tr>
+        <td>Operações</td>
+        <td>Maria Santos</td>
+        <td>Próximo ao Vencimento</td>
+      </tr>
+      <tr>
+        <td>Administrativo</td>
+        <td>Carlos Lima</td>
+        <td>Vencido</td>
+      </tr>
+      <tr>
+        <td>Financeiro</td>
+        <td>Lucas Costa</td>
+        <td>Em Dia</td>
+      </tr>
+      <tr>
+        <td>RH</td>
+        <td>Ana Beatriz</td>
+        <td>Próximo ao Vencimento</td>
+      </tr>
+      <tr>
+        <td>TI</td>
+        <td>Pedro Henrique</td>
+        <td>Em Dia</td>
+      </tr>
+    </tbody>
+  </table>
+</section>
   </div>
 
   <script>
   const ctxBarra = document.getElementById('barraChart').getContext('2d');
-  const barraChart = new Chart(ctxBarra, {
-    type: 'bar',
-    data: {
-      labels: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai'],
-      datasets: [{
-        label: 'Inspeções',
-        data: [12, 19, 3, 5, 2],
-        backgroundColor: '#2c3e50'
-      }]
-    },
-    options: {
-      responsive: true,
-      maintainAspectRatio: false,
-      scales: {
-        y: { beginAtZero: true }
-      }
-    }
-  });
-
   const ctxPizza = document.getElementById('graficoPizza').getContext('2d');
-  const graficoPizza = new Chart(ctxPizza, {
-  type: 'pie',
-  data: {
-    labels: ['Capacete', 'Sapato', 'Óculos', 'Auricular'],
-    datasets: [{
-      data: [25, 35, 20, 20],
-      backgroundColor: ['#2c3e50', '#34495e', '#7f8c8d', '#95a5a6'],
-      borderColor: '#fff',
-      borderWidth: 1
-    }]
-  },
-  options: {
-    responsive: true,
-    plugins: {
-      legend: {
-        position: 'right',
-        align: 'center',
-        labels: {
-          boxWidth: 8,
-          padding: 10,
-          color: '#2c3e50'
+
+  // Função para aplicar cores com base no tema
+  function getChartOptions(isDark) {
+    return {
+      barra: {
+        type: 'bar',
+        data: {
+          labels: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai'],
+          datasets: [{
+            label: 'Inspeções',
+            data: [12, 19, 10, 15, 4],
+            backgroundColor: isDark ? '#4d6d82' : '#2c3e50'
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          scales: {
+            y: {
+              beginAtZero: true,
+              ticks: { color: isDark ? '#d9e6f2' : '#2c3e50' },
+              grid: { color: isDark ? '#2c3e50' : '#ddd' }
+            },
+            x: {
+              ticks: { color: isDark ? '#d9e6f2' : '#2c3e50' },
+              grid: { color: isDark ? '#2c3e50' : '#ddd' }
+            }
+          },
+          plugins: {
+            legend: false
+          }
+        }
+      },
+      pizza: {
+        type: 'pie',
+        data: {
+          labels: ['Capacete', 'Sapato', 'Óculos', 'Auricular'],
+          datasets: [{
+            data: [25, 35, 20, 20],
+            backgroundColor: isDark
+              ? ['#4d6d82', '#5f7990', '#7d94a9', '#9bb0c3']
+              : ['#2c3e50', '#34495e', '#7f8c8d', '#95a5a6'],
+            borderColor: '#fff',
+            borderWidth: 1
+          }]
+        },
+        options: {
+          responsive: true,
+          plugins: {
+            legend: {
+              position: 'right',
+              align: 'center',
+              labels: {
+                boxWidth: 8,
+                padding: 10,
+                color: isDark ? '#d9e6f2' : '#2c3e50'
+              }
+            }
+          }
         }
       }
-    }
+    };
   }
-});
 
-const toggleMenu = document.getElementById('toggleMenu');
+  // Detecta modo escuro salvo
+  const isDark = localStorage.getItem('modoEscuro') === 'true';
+  if (isDark) document.body.classList.add('dark-theme');
+
+  // Inicializa os gráficos com base no tema
+  const chartConfig = getChartOptions(isDark);
+  const barraChart = new Chart(ctxBarra, chartConfig.barra);
+  const graficoPizza = new Chart(ctxPizza, chartConfig.pizza);
+
+  // Alterna menu no mobile
+  const toggleMenu = document.getElementById('toggleMenu');
   const menuList = document.getElementById('menuList');
-
-  toggleMenu.addEventListener('click', () => {
+  toggleMenu?.addEventListener('click', () => {
     menuList.classList.toggle('active');
+  });
+
+  // Escuta alterações no modo escuro se houver checkbox presente
+  document.getElementById('toggleTema')?.addEventListener('change', (e) => {
+    const ativado = e.target.checked;
+    document.body.classList.toggle('dark-theme', ativado);
+    localStorage.setItem('modoEscuro', ativado);
+
+    // Destroi os gráficos antigos e recria com tema atualizado
+    barraChart.destroy();
+    graficoPizza.destroy();
+    const novaConfig = getChartOptions(ativado);
+    new Chart(ctxBarra, novaConfig.barra);
+    new Chart(ctxPizza, novaConfig.pizza);
   });
 </script>
 
